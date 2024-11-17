@@ -4,17 +4,20 @@ import { Menu } from "lucide-react";
 
 export default function SideMenu({
   onClickTab,
+  onOpen,
   isOpen,
   menuItems,
+  activeTab,
 }: {
   onClickTab: any;
   onOpen: any;
   isOpen: boolean;
   menuItems: any;
+  activeTab: string;
 }) {
   return (
-    <>
-      <div className="md:hidden mb-4">
+    <main className="flex-1 p-4 overflow-auto">
+      <div className="mb-4">
         <Sheet open={isOpen} onOpenChange={onOpen}>
           <SheetTrigger asChild>
             <Button variant="outline" size="icon">
@@ -24,7 +27,7 @@ export default function SideMenu({
           </SheetTrigger>
           <SheetContent side="left">
             <nav className="flex flex-col space-y-2 mt-4">
-              {menuItems.map((item) => (
+              {menuItems.map((item: any) => (
                 <button
                   key={item.id}
                   onClick={() => {
@@ -44,6 +47,6 @@ export default function SideMenu({
           </SheetContent>
         </Sheet>
       </div>
-    </>
+    </main>
   );
 }

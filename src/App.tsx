@@ -14,9 +14,9 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Heart, Package, Star, User, Ticket, Menu } from "lucide-react";
 import DeskTopMenu from "./refactoringCode/DeskTopMenu";
+import SideMenu from "./refactoringCode/SideMenu";
 
 export default function MyPage() {
   const [activeTab, setActiveTab] = useState("orders");
@@ -209,45 +209,14 @@ export default function MyPage() {
 
   return (
     <div className="flex h-screen bg-background">
-      <DeskTopMenu menuItems={menuItems} onClickMenu={onClickTab} />
-
-      {/* Main content */}
-      <main className="flex-1 p-4 overflow-auto">
-        {/* Mobile menu */}
-        <div className="md:hidden mb-4">
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild>
-              <Button variant="outline" size="icon">
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">메뉴 열기</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left">
-              <nav className="flex flex-col space-y-2 mt-4">
-                {menuItems.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => {
-                      setActiveTab(item.id);
-                      setIsOpen(false);
-                    }}
-                    className={`flex items-center px-4 py-2 text-left ${
-                      activeTab === item.id
-                        ? "bg-primary text-primary-foreground"
-                        : "hover:bg-muted-foreground/10"
-                    }`}
-                  >
-                    <item.icon className="w-5 h-5 mr-2" />
-                    {item.label}
-                  </button>
-                ))}
-              </nav>
-            </SheetContent>
-          </Sheet>
-        </div>
-
-        {renderContent()}
-      </main>
+      <SideMenu
+        menuItems={menuItems}
+        onClickTab={onClickTab}
+        isOpen={isOpen}
+        onOpen={() => setIsOpen(!isOpen)}
+        activeTab={activeTab}
+      />
+      {renderContent()}
     </div>
   );
 }
