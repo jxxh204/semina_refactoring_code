@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: aquamarine;
+  border-radius: .5rem;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
