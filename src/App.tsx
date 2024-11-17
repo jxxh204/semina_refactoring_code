@@ -16,6 +16,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Heart, Package, Star, User, Ticket, Menu } from "lucide-react";
+import DeskTopMenu from "./refactoringCode/DeskTopMenu";
 
 export default function MyPage() {
   const [activeTab, setActiveTab] = useState("orders");
@@ -28,6 +29,10 @@ export default function MyPage() {
     { id: "profile", label: "회원 정보 수정", icon: User },
     { id: "coupons", label: "쿠폰함", icon: Ticket },
   ];
+  const onClickTab = (id: string) => {
+    setActiveTab(id);
+    setIsOpen(false);
+  };
 
   const renderContent = () => {
     switch (activeTab) {
@@ -204,28 +209,7 @@ export default function MyPage() {
 
   return (
     <div className="flex h-screen bg-background">
-      {/* Sidebar for larger screens */}
-      <aside className="hidden md:flex w-64 flex-col bg-muted">
-        <div className="p-4">
-          <h1 className="text-2xl font-bold">마이페이지</h1>
-        </div>
-        <nav className="flex-1">
-          {menuItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => setActiveTab(item.id)}
-              className={`flex items-center w-full px-4 py-2 text-left ${
-                activeTab === item.id
-                  ? "bg-primary text-primary-foreground"
-                  : "hover:bg-muted-foreground/10"
-              }`}
-            >
-              <item.icon className="w-5 h-5 mr-2" />
-              {item.label}
-            </button>
-          ))}
-        </nav>
-      </aside>
+      <DeskTopMenu menuItems={menuItems} onClickMenu={onClickTab} />
 
       {/* Main content */}
       <main className="flex-1 p-4 overflow-auto">
