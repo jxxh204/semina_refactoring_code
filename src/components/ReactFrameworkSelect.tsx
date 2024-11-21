@@ -3,6 +3,12 @@ import { useState } from "react";
 import InputButton from "./InputButton";
 import Button from "./Button";
 
+// Custom Hook for boolean state
+function useBoolean(initial = false) {
+  const [state, setState] = useState(initial);
+  return [state, () => setState(true), () => setState(false)] as const;
+}
+
 const Options: React.FC<{
   onClose: () => void;
   children: React.ReactNode;
@@ -12,7 +18,7 @@ const Options: React.FC<{
   </div>
 );
 
-function ReactFrameworkSelect({ defaultValue = "" }) {
+function ReactFrameworkSelect({ defaultValue = "", label = "" }) {
   const [isOpen, open, close] = useBoolean();
   const [selected, change] = useState(defaultValue);
 
@@ -20,7 +26,7 @@ function ReactFrameworkSelect({ defaultValue = "" }) {
 
   return (
     <div className="relative w-[300px]">
-      <InputButton label="React Framework" value={selected} onClick={open} />
+      <InputButton label={label} value={selected} onClick={open} />
       {isOpen ? (
         <Options onClose={close}>
           {options.map((value) => (
@@ -39,12 +45,6 @@ function ReactFrameworkSelect({ defaultValue = "" }) {
       ) : null}
     </div>
   );
-}
-
-// Custom Hook for boolean state
-function useBoolean(initial = false) {
-  const [state, setState] = useState(initial);
-  return [state, () => setState(true), () => setState(false)] as const;
 }
 
 export default ReactFrameworkSelect;
