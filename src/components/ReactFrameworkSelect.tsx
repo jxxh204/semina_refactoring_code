@@ -27,6 +27,7 @@ function ReactFrameworkSelect({ defaultValue = "", label = "" }) {
   return (
     <div className="relative w-[300px]">
       <InputButton label={label} value={selected} onClick={open} />
+
       {isOpen ? (
         <Options onClose={close}>
           {options.map((value) => (

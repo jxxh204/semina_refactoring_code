@@ -1,7 +1,7 @@
 interface InputButtonProps {
-  label: string;
   value: string;
-  onClick: () => void;
+  label?: string;
+  onClick?: () => void;
 }
 
 const InputButton: React.FC<InputButtonProps> = ({ label, value, onClick }) => (
