@@ -1,21 +1,9 @@
-import React, { useState } from "react";
-import { Calendar } from "./components/Calender";
+import ReactFrameworkSelect from "./components/ReactFrameworkSelect";
 
-const App: React.FC = () => {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-
-  const handleSelectDate = (date: Date) => {
-    setSelectedDate(date);
-  };
-
+export default function App() {
   return (
-    <div className="flex flex-row justify-center items-center w-full h-full bg-gray-100">
-      <Calendar onSelectDate={handleSelectDate} />
-      {selectedDate && (
-        <p className="mt-4 text-center text-lg text-gray-700"></p>
-      )}
+    <div className="p-4">
+      <ReactFrameworkSelect defaultValue="Next.js" />
     </div>
   );
-};
-
-export default App;
+}
