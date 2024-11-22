@@ -7,6 +7,7 @@ function FrameworkSelect() {
   const onChange = (value: string) => {
     change(value);
   };
+  const options = ["Next.js", "Remix", "Gatsby", "Relay"]; // 도메인 데이터
   // 도메인
 
   return (
@@ -16,7 +17,7 @@ function FrameworkSelect() {
       // input button 컴포넌트를 변경하더라도 영향을 끼치지 않게 되었다.
       value={selected}
       onChange={onChange}
-      options={["Next.js", "Remix", "Gatsby", "Relay"]}
+      options={options}
     />
   );
 }
